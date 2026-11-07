@@ -1,0 +1,465 @@
+:root {
+  --wood: #231812;
+  --paper: #f4efe6;
+  --ink: #1c1612;
+  --ink-soft: #3e342c;
+  --lacquer: #6e2c24;
+  --brass: #8a6233;
+  --rule: rgba(28, 22, 18, 0.16);
+  --cream: #f7f3ea;
+  --serif: "Songti SC", "STSong", "Noto Serif CJK SC", "Noto Serif SC", "Source Han Serif SC", "Source Han Serif CN", "PMingLiU", "SimSun", serif;
+  --sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "WenQuanYi Micro Hei", "Droid Sans Fallback", sans-serif;
+  --rim: clamp(0.65rem, 1.5vw, 1.15rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  padding:
+    max(var(--rim), env(safe-area-inset-top))
+    max(var(--rim), env(safe-area-inset-right))
+    max(var(--rim), env(safe-area-inset-bottom))
+    max(var(--rim), env(safe-area-inset-left));
+  background-color: var(--wood);
+  background-image: radial-gradient(ellipse at 50% 0%, #3a2b24 0%, var(--wood) 58%);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.75;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+::selection {
+  background: var(--lacquer);
+  color: var(--cream);
+}
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--brass);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+a:hover {
+  color: var(--lacquer);
+  text-decoration-color: var(--lacquer);
+}
+
+a:focus-visible,
+.skip:focus {
+  outline: 2px solid var(--lacquer);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: max(0.75rem, env(safe-area-inset-left));
+  top: 0;
+  z-index: 5;
+  transform: translateY(-140%);
+  padding: 0.55rem 0.85rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--lacquer);
+}
+
+.skip:focus {
+  transform: translateY(0.7rem);
+}
+
+.box {
+  width: min(60rem, 100%);
+  min-width: 0;
+  min-height: calc(100vh - 2 * var(--rim));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px rgba(199, 166, 112, 0.5);
+}
+
+.spine {
+  position: relative;
+  background: var(--lacquer);
+  color: var(--cream);
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1;
+  user-select: none;
+  box-shadow: inset -1px 0 0 rgba(232, 206, 156, 0.45);
+}
+
+.spine span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 0.48em;
+  white-space: nowrap;
+}
+
+.spine-title {
+  top: 1.65rem;
+}
+
+.spine-name {
+  bottom: 1.65rem;
+}
+
+.sheet {
+  min-width: 0;
+  background: linear-gradient(90deg, rgba(110, 44, 36, 0.045), transparent 2.6rem);
+}
+
+.page {
+  width: 100%;
+  padding: clamp(2.2rem, 7vh, 4.4rem) clamp(1.5rem, 4.2vw, 3rem) 3.75rem;
+}
+
+.mast-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  flex-wrap: wrap;
+}
+
+.lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 44px;
+}
+
+.seal {
+  width: 2.8rem;
+  height: 2.8rem;
+  flex: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: center;
+  justify-items: center;
+  gap: 0.02rem;
+  border: 1px solid var(--lacquer);
+  outline: 1px solid var(--lacquer);
+  outline-offset: -5px;
+  color: var(--lacquer);
+  font-family: var(--serif);
+  font-size: 0.74rem;
+  line-height: 1.05;
+}
+
+.who {
+  font-family: var(--serif);
+  font-size: 1.28rem;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  padding-top: 0.08em;
+}
+
+.repo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  margin-top: clamp(2.6rem, 6.5vh, 4.15rem);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.3rem, 7.4vw, 4.35rem);
+  line-height: 1.16;
+  letter-spacing: 0.02em;
+}
+
+h1 .line {
+  display: block;
+}
+
+h1 .line-deep {
+  margin-top: 0.12em;
+  padding-left: 0.95em;
+  color: var(--lacquer);
+}
+
+.roleline {
+  margin-top: 1.35rem;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+}
+
+hr.mark {
+  width: 2.4rem;
+  height: 1px;
+  margin: 1.45rem 0 1.15rem;
+  border: 0;
+  background: var(--lacquer);
+}
+
+.stance {
+  max-width: 34em;
+  font-family: var(--serif);
+  font-size: 1.14rem;
+  line-height: 1.9;
+  text-wrap: pretty;
+}
+
+.experience {
+  margin-top: clamp(3rem, 7vh, 4.6rem);
+}
+
+.study {
+  margin-top: 3.15rem;
+}
+
+.section-title {
+  margin: 0 0 0.7rem;
+  color: var(--lacquer);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.section-title span {
+  letter-spacing: 0.46em;
+}
+
+.drawer {
+  padding: 1.15rem 0 1.2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.drawer:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.drawer-head h3,
+.school h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+}
+
+.drawer-head p {
+  margin-top: 0.12rem;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.objects {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem 1.75rem;
+  margin-top: 0.9rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(138, 98, 51, 0.72);
+}
+
+.objects li,
+.piece {
+  margin: 0;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.piece {
+  margin-top: 0.7rem;
+}
+
+cite {
+  font-style: normal;
+  font-family: var(--serif);
+  font-size: 1.14em;
+  letter-spacing: 0.04em;
+  color: var(--lacquer);
+  white-space: nowrap;
+}
+
+.school-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.school {
+  min-width: 0;
+  padding: 1.05rem 1.25rem 1.15rem 0;
+}
+
+.school + .school {
+  padding: 1.05rem 0 1.15rem 1.25rem;
+  border-left: 1px solid var(--rule);
+}
+
+.school p {
+  margin-top: 0.35rem;
+  color: var(--ink-soft);
+}
+
+main:focus {
+  outline: none;
+}
+
+main:focus-visible {
+  outline: 2px solid var(--lacquer);
+  outline-offset: 4px;
+}
+
+@media (max-width: 800px) {
+  .objects {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .objects li + li {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid rgba(138, 98, 51, 0.72);
+  }
+}
+
+@media (max-width: 720px) {
+  .box {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .spine {
+    min-height: 3.15rem;
+    box-shadow: inset 0 -1px 0 rgba(232, 206, 156, 0.45);
+  }
+
+  .spine span {
+    position: static;
+    transform: none;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    letter-spacing: 0.55em;
+  }
+
+  .spine-name {
+    display: none;
+  }
+
+  .spine-title {
+    display: block;
+    padding: 0.95rem 1rem 0.85rem;
+    text-align: center;
+    margin-right: -0.55em;
+  }
+
+  .sheet {
+    background: linear-gradient(180deg, rgba(110, 44, 36, 0.045), transparent 2rem);
+  }
+
+  h1 .line-deep {
+    padding-left: 0.48em;
+  }
+}
+
+@media (max-width: 400px) {
+  .school h3 {
+    font-size: 1.28rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+@media (max-width: 640px) {
+  .school-row {
+    grid-template-columns: 1fr;
+  }
+
+  .school,
+  .school + .school {
+    padding: 1rem 0 1.05rem;
+    border-left: 0;
+  }
+
+  .school + .school {
+    border-top: 1px solid var(--rule);
+  }
+
+  .mast-top {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  a {
+    transition: none;
+  }
+}
+
+@media print {
+  body {
+    display: block;
+    min-height: 0;
+    padding: 0;
+    background: white;
+  }
+
+  .box {
+    display: block;
+    box-shadow: none;
+    background: white;
+  }
+
+  .spine {
+    display: none;
+  }
+
+  .sheet {
+    background: none;
+  }
+
+  .page {
+    width: auto;
+    padding: 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
